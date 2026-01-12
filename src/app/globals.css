@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+/* Root theme variables (LIGHT ONLY) */
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+/* Tailwind theme mapping */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* Global body styles */
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+}
