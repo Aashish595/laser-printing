@@ -1,23 +1,24 @@
+import { ArrowRight, Play } from "lucide-react";
 import Reveal from "./Reveal";
 
 export default function Hero() {
   return (
-    <section className="pt-44 pb-36 bg-slate-50">
-      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-28 items-center">
+    <section className="relative pt-44 pb-36 bg-slate-50 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-20 items-center">
 
-        {/* LEFT */}
+        {/* LEFT CONTENT */}
         <Reveal>
-          <div className="space-y-8">
+          <div className="max-w-xl space-y-8">
 
-            {/* Section Label */}
-            <span className="inline-block text-xs uppercase tracking-[0.35em] text-slate-500">
+            {/* Label */}
+            <span className="text-xs uppercase tracking-[0.35em] text-slate-500">
               Industrial Laser Solutions
             </span>
 
-            <div className="relative">
-              <div className="absolute -left-6 top-2 h-20 w-[3px] bg-orange-600" />
-
-              <h1 className="text-5xl font-semibold leading-tight text-slate-900">
+            {/* Heading */}
+            <div className="relative pl-6">
+              <div className="absolute left-0 top-2 h-20 w-[3px] bg-orange-600 rounded-full" />
+              <h1 className="text-5xl xl:text-6xl font-semibold leading-tight text-slate-900">
                 Precision Laser Printing
                 <br />
                 <span className="text-orange-600">
@@ -26,69 +27,62 @@ export default function Hero() {
               </h1>
             </div>
 
-            <p className="text-lg text-slate-600 max-w-xl">
-              High-accuracy laser printing, engraving, and metal
-              fabrication services designed for manufacturing,
-              architecture, and heavy industrial production.
+            {/* Description */}
+            <p className="text-lg text-slate-600">
+              High-accuracy laser printing, engraving, and metal fabrication
+              solutions designed for manufacturing, architecture, and
+              heavy-duty industrial applications.
             </p>
 
             {/* CTAs */}
-            <div className="flex gap-5 pt-4">
+            <div className="flex flex-wrap gap-5 pt-6">
               <a
                 href="#contact"
-                className="px-9 py-3 bg-slate-900 text-white uppercase text-xs tracking-widest hover:bg-slate-950 transition"
+                className="inline-flex items-center gap-2 px-9 py-3 bg-slate-900 text-white uppercase text-xs tracking-widest hover:bg-slate-950 transition"
               >
                 Get a Quote
+                <ArrowRight size={14} />
               </a>
 
               <a
                 href="#services"
-                className="px-9 py-3 border border-slate-900 text-slate-900 uppercase text-xs tracking-widest hover:bg-slate-900 hover:text-white transition"
+                className="inline-flex items-center gap-2 px-9 py-3 border border-slate-900 text-slate-900 uppercase text-xs tracking-widest hover:bg-slate-900 hover:text-white transition"
               >
                 Our Services
               </a>
             </div>
-
-            {/* STATS */}
-            <div className="grid grid-cols-3 gap-8 pt-10 border-t border-slate-200 max-w-lg">
-              <div>
-                <p className="text-2xl font-semibold text-slate-900">15+</p>
-                <p className="text-xs uppercase tracking-widest text-slate-500">
-                  Years Experience
-                </p>
-              </div>
-              <div>
-                <p className="text-2xl font-semibold text-slate-900">200+</p>
-                <p className="text-xs uppercase tracking-widest text-slate-500">
-                  Industrial Clients
-                </p>
-              </div>
-              <div>
-                <p className="text-2xl font-semibold text-slate-900">98%</p>
-                <p className="text-xs uppercase tracking-widest text-slate-500">
-                  Accuracy Rate
-                </p>
-              </div>
-            </div>
-
           </div>
         </Reveal>
 
-        {/* RIGHT */}
+        {/* RIGHT MEDIA AREA */}
         <Reveal delay={0.2}>
-          <div className="relative h-[460px] bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center overflow-hidden">
+          {/* IMPORTANT: matching left alignment */}
+          <div className="max-w-xl">
 
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-slate-900/5" />
+            <div className="relative w-full h-[420px] xl:h-[480px] rounded-2xl overflow-hidden bg-gradient-to-br from-slate-200 to-slate-300">
 
-            {/* Center Text */}
-            <span className="uppercase text-xs tracking-[0.35em] text-slate-700 z-10">
-              CNC • LASER • METAL
-            </span>
+              {/* Replace with <img> or <video> */}
+              <div className="absolute inset-0 bg-slate-900/10" />
 
-            {/* Industrial Details */}
-            <div className="absolute top-5 right-5 w-12 h-12 border-t-2 border-r-2 border-slate-400" />
-            <div className="absolute bottom-5 left-5 w-12 h-12 border-b-2 border-l-2 border-slate-400" />
+              {/* Play Button */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-lg cursor-pointer hover:scale-105 transition">
+                  <Play className="text-slate-900 ml-1" size={22} />
+                </div>
+              </div>
+
+              {/* Caption */}
+              <div className="absolute bottom-6 left-6">
+                <span className="text-xs uppercase tracking-[0.35em] text-slate-700">
+                  CNC • LASER • METAL
+                </span>
+              </div>
+
+              {/* Decorative Corners */}
+              <div className="absolute top-6 right-6 w-12 h-12 border-t-2 border-r-2 border-slate-400" />
+              <div className="absolute bottom-6 left-6 w-12 h-12 border-b-2 border-l-2 border-slate-400" />
+            </div>
+
           </div>
         </Reveal>
 
