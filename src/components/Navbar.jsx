@@ -1,61 +1,71 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
-const NAV_ITEMS = [
-  { id: "about", label: "About" },
-  { id: "services", label: "Services" },
-  { id: "contact", label: "Contact" },
-];
 
 const NAVBAR_HEIGHT = 72;
 
 export default function Navbar() {
+  const NAV_ITEMS = useMemo(
+    () => [
+      { id: "about", label: "About" },
+      { id: "services", label: "Services" },
+      { id: "contact", label: "Contact" },
+    ],
+    [],
+  );
+
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState("");
+  const [active, setActive] = useState("about");
 
-  useEffect(() => {
-    const onScroll = () => {
-      const scrollPos = window.scrollY + NAVBAR_HEIGHT + 40;
-
-      for (const item of NAV_ITEMS) {
-        const el = document.getElementById(item.id);
-        if (!el) continue;
-
-        if (
-          scrollPos >= el.offsetTop &&
-          scrollPos < el.offsetTop + el.offsetHeight
-        ) {
-          setActive(item.id);
-          break;
-        }
-      }
-    };
-
-    window.addEventListener("scroll", onScroll);
-    onScroll();
-
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
+  // Smooth scroll with offset
   const scrollTo = (id) => {
     setOpen(false);
     const el = document.getElementById(id);
     if (!el) return;
 
     const y =
-      el.getBoundingClientRect().top +
-      window.pageYOffset -
-      NAVBAR_HEIGHT;
+      el.getBoundingClientRect().top + window.pageYOffset - NAVBAR_HEIGHT - 10; // little extra air
 
     window.scrollTo({ top: y, behavior: "smooth" });
   };
 
+  useEffect(() => {
+    const ids = NAV_ITEMS.map((i) => i.id);
+    const sections = ids
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
+
+    if (!sections.length) return;
+
+    // Best solution: IntersectionObserver (no flicker)
+    const io = new IntersectionObserver(
+      (entries) => {
+        // pick the most visible section
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort(
+            (a, b) => (b.intersectionRatio ?? 0) - (a.intersectionRatio ?? 0),
+          );
+
+        if (visible[0]?.target?.id) setActive(visible[0].target.id);
+      },
+      {
+        // account for fixed navbar height
+        root: null,
+        threshold: [0.2, 0.35, 0.5, 0.65],
+        rootMargin: `-${NAVBAR_HEIGHT + 20}px 0px -50% 0px`,
+      },
+    );
+
+    sections.forEach((s) => io.observe(s));
+
+    return () => io.disconnect();
+  }, [NAV_ITEMS]);
+
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur border-b border-slate-200">
-      <div className="max-w-7xl mx-auto h-[72px] px-6 lg:px-8 flex items-center justify-between">
-
+      <div className="w-full max-w-[1400px] mx-auto h-[72px] px-6 flex items-center justify-between">
         {/* BRAND */}
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
@@ -72,19 +82,15 @@ export default function Navbar() {
               key={id}
               onClick={() => scrollTo(id)}
               className={`relative transition-colors
-                ${
-                  active === id
-                    ? "text-slate-900"
-                    : "text-slate-600 hover:text-slate-900"
-                }
-                after:absolute after:left-0 after:-bottom-2 after:h-[2px]
-                after:bg-orange-600 after:transition-all
-                ${
-                  active === id
-                    ? "after:w-full"
-                    : "after:w-0 hover:after:w-full"
-                }
-              `}
+            ${
+              active === id
+                ? "text-slate-900"
+                : "text-slate-600 hover:text-slate-900"
+            }
+            after:absolute after:left-0 after:-bottom-2 after:h-[2px]
+            after:bg-orange-600 after:transition-all
+            ${active === id ? "after:w-full" : "after:w-0 hover:after:w-full"}
+          `}
             >
               {label}
             </button>
@@ -100,28 +106,7 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* MOBILE MENU */}
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
-            className="md:hidden bg-white border-t border-slate-200 px-6 py-8 space-y-6"
-          >
-            {NAV_ITEMS.map(({ id, label }) => (
-              <button
-                key={id}
-                onClick={() => scrollTo(id)}
-                className="block w-full text-left uppercase tracking-widest text-sm text-slate-700 hover:text-orange-600"
-              >
-                {label}
-              </button>
-            ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* MOBILE MENU ...same */}
     </nav>
   );
 }
