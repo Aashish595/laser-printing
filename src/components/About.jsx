@@ -9,7 +9,7 @@ export default function About() {
     >
       <div className="min-h-screen flex items-center">
         {/* ✅ SAME CONTAINER AS NAVBAR/HERO */}
-        <div className="w-full max-w-[1400px] mx-auto px-6">
+        <div className="page-container">
           <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-16 items-center">
             {/* LEFT – MEDIA (give it a tiny inset so it matches reference) */}
             <Reveal>
@@ -41,27 +41,28 @@ export default function About() {
                     {/* Heading (tight to bar like reference) */}
                     <div className="relative pl-4">
                       <div className="absolute left-0 top-[10px] h-10 w-[3px] bg-orange-600 rounded-full" />
-                      <h2 className="text-4xl font-semibold text-slate-900 leading-tight">
+                      <h2 className="text-4xl md:text-5xl font-semibold tracking-tight leading-[1.05] text-slate-900">
                         About Mark &amp; Spark
                       </h2>
                     </div>
 
                     {/* Copy */}
-                    <div className="mt-6 space-y-5 text-[15px] text-slate-700 leading-relaxed">
+                    <div className="mt-6 space-y-5 text-[15px] font-normal text-slate-700 leading-relaxed">
                       <p>
-                        Mark &amp; Spark is a precision-driven branding and fabrication
-                        studio specializing in laser engraving, custom printing, and
-                        advanced manufacturing solutions.
+                        Mark &amp; Spark is a precision-driven branding and
+                        fabrication studio specializing in laser engraving,
+                        custom printing, and advanced manufacturing solutions.
                       </p>
 
                       <p>
-                        We help brands transform ideas into engraved metal, merchandise,
-                        fabric prints, and 3D components—built with technical accuracy.
+                        We help brands transform ideas into engraved metal,
+                        merchandise, fabric prints, and 3D components—built with
+                        technical accuracy.
                       </p>
 
                       <p>
-                        From one-off customs to scalable production, we deliver reliable,
-                        durable, brand-consistent results.
+                        From one-off customs to scalable production, we deliver
+                        reliable, durable, brand-consistent results.
                       </p>
                     </div>
                   </div>

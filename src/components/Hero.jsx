@@ -4,20 +4,19 @@ import Reveal from "./Reveal";
 export default function Hero() {
   return (
     <section className="relative bg-slate-50 overflow-hidden min-h-screen">
-      {/* ✅ This wrapper ensures content sits nicely inside full height */}
       <div className="min-h-screen flex items-center">
-        {/* ✅ Ulrawide-safe canvas */}
-        <div className="w-full max-w-[1400px] mx-auto px-6">
-          <div className="grid lg:grid-cols-[0.8fr_1.2fr] gap-14 xl:gap-16 items-center">
+        {/*  Use global container (reduces side space) */}
+        <div className="page-container">
+          {/*  Give more width to video side */}
+          <div className="grid lg:grid-cols-[0.65fr_1.35fr] gap-10 xl:gap-12 items-center">
             {/* LEFT */}
             <Reveal>
-              <div className="max-w-md">
+              <div className="max-w-lg xl:max-w-xl">
                 <div className="flex items-start gap-6">
                   {/* BAR */}
                   <div className="mt-3 h-16 md:h-20 w-1.5 bg-orange-600 shrink-0 rounded-full" />
 
                   <div className="min-w-0">
-                    {/* TITLE (2 lines) */}
                     <h1 className="text-4xl md:text-5xl xl:text-6xl font-semibold leading-[1.05] text-slate-900">
                       <span className="whitespace-nowrap">Precision Brand</span>
                       <br />
@@ -30,7 +29,6 @@ export default function Hero() {
                       accuracy.
                     </p>
 
-                    {/* CTA (same row) */}
                     <div className="mt-8 flex items-center gap-5 whitespace-nowrap">
                       <a
                         href="#contact"
@@ -51,10 +49,18 @@ export default function Hero() {
               </div>
             </Reveal>
 
-            {/* RIGHT – Wide video, responsive height */}
+            {/* RIGHT (BIGGER VIDEO) */}
             <Reveal delay={0.2}>
               <div className="relative w-full">
-                <div className="relative w-full aspect-video xl:aspect-21/9 rounded-3xl overflow-hidden border border-slate-200 bg-linear-to-br from-slate-200 to-slate-300 shadow-sm">
+                <div
+                  className="
+                    relative w-full rounded-3xl overflow-hidden
+                    border border-slate-200 bg-linear-to-br from-slate-200 to-slate-300
+                    shadow-sm
+                    aspect-video
+                    xl:aspect-auto xl:min-h-[75vh]
+                  "
+                >
                   <div className="absolute inset-0 bg-slate-900/10" />
 
                   <button

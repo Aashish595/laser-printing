@@ -13,61 +13,55 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="services" className="bg-white">
-      {/* match About/Contact: centered canvas with similar vertical rhythm */}
-      <div className="min-h-screen flex items-center">
-        <div className="w-full max-w-[1400px] mx-auto px-6">
-
-          {/* IMPORTANT: balanced columns + shared baseline */}
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-14 xl:gap-16 items-start">
-            {/* LEFT CONTENT */}
+    <section id="services" className="bg-white scroll-mt-[90px]">
+      {/* ✅ match About/Contact spacing */}
+      <div className="py-24 lg:py-28">
+        <div className="page-container">
+          <div className="grid grid-cols-1 lg:grid-cols-[0.95fr_1.05fr] gap-12 xl:gap-14 items-start">
+            {/* LEFT */}
             <Reveal>
-              <div className="max-w-[560px]">
+              <div className="max-w-[560px] font-sans">
                 <div className="flex items-start gap-3">
-                  {/* STACKED LABEL */}
+                  {/* stacked label */}
                   <div className="flex flex-col text-[11px] leading-[14px] text-slate-600/70 mt-[6px] -mr-1">
                     <span>What</span>
                     <span>We</span>
                     <span>Do</span>
                   </div>
 
-                  {/* ORANGE BAR */}
+                  {/* bar */}
                   <div className="mt-[6px] h-[62px] w-[3px] bg-orange-600 rounded-full shrink-0" />
 
-                  {/* Heading block starts tight to bar */}
+                  {/* title + copy */}
                   <div className="pl-1">
                     <h2 className="text-5xl font-semibold tracking-tight text-slate-900 leading-[1]">
                       Our Services
                     </h2>
 
-                    <p className="mt-6 text-[16px] text-slate-600 leading-relaxed">
-                      We offer precision-driven branding and manufacturing
-                      solutions designed to help businesses create high-quality,
-                      durable, and consistent physical products.
+                    <p className="mt-5 text-[15px] md:text-[16px] font-normal text-slate-600 leading-relaxed">
+                      We offer precision-driven branding and manufacturing solutions designed
+                      to help businesses create high-quality, durable, and consistent physical products.
                     </p>
 
-                    <p className="mt-4 text-[16px] text-slate-600 leading-relaxed">
-                      From laser engraving to custom printing and prototyping,
-                      our services are built to support brands at every stage.
+                    <p className="mt-4 text-[15px] md:text-[16px] font-normal text-slate-600 leading-relaxed">
+                      From laser engraving to custom printing and prototyping, our services are built
+                      to support brands at every stage.
                     </p>
                   </div>
                 </div>
               </div>
             </Reveal>
 
-            {/* RIGHT GRID (aligned to the same top baseline as left) */}
+            {/* RIGHT */}
             <Reveal delay={0.12}>
-              <div className="w-full">
-                {/* optional: gives same top “air” as left header */}
+              <div className="w-full font-sans">
+                {/* align top baseline with left */}
                 <div className="mt-[6px]" />
 
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {/* cards: 2 cols on large, 3 only on xl so not too small */}
+                <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-6">
                   {services.map((s) => (
-                    <ServiceMediaCard
-                      key={s.title}
-                      title={s.title}
-                      img={s.img}
-                    />
+                    <ServiceMediaCard key={s.title} title={s.title} img={s.img} />
                   ))}
                 </div>
               </div>
@@ -79,8 +73,6 @@ export default function Services() {
   );
 }
 
-/* ---------- CARD ---------- */
-
 function ServiceMediaCard({ title, img }) {
   return (
     <div
@@ -89,10 +81,10 @@ function ServiceMediaCard({ title, img }) {
         border border-slate-200 bg-slate-100
         shadow-sm transition-all duration-300
         hover:-translate-y-1 hover:shadow-xl hover:border-slate-300
-        cursor-pointer
+        cursor-pointer font-sans
       "
     >
-      <div className="relative h-36 sm:h-40 lg:h-44">
+      <div className="relative h-40 sm:h-44">
         <img
           src={img}
           alt={title}
