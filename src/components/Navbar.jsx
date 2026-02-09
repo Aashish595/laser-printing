@@ -79,7 +79,7 @@ export default function Navbar() {
         </button>
 
         {/* DESKTOP MENU */}
-        <div className="hidden md:flex gap-10 text-xs uppercase tracking-widest">
+        <div className="hidden md:flex gap-10 uppercase tracking-widest">
           {NAV_ITEMS.map(({ id, label }) => (
             <button
               key={id}
