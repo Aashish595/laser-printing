@@ -12,7 +12,7 @@ export default function Navbar() {
       { id: "services", label: "Services" },
       { id: "contact", label: "Contact" },
     ],
-    []
+    [],
   );
 
   const [open, setOpen] = useState(false);
@@ -24,10 +24,7 @@ export default function Navbar() {
     if (!el) return;
 
     const y =
-      el.getBoundingClientRect().top +
-      window.pageYOffset -
-      NAVBAR_HEIGHT -
-      10;
+      el.getBoundingClientRect().top + window.pageYOffset - NAVBAR_HEIGHT - 10;
 
     window.scrollTo({ top: y, behavior: "smooth" });
   };
@@ -45,8 +42,7 @@ export default function Navbar() {
         const visible = entries
           .filter((e) => e.isIntersecting)
           .sort(
-            (a, b) =>
-              (b.intersectionRatio || 0) - (a.intersectionRatio || 0)
+            (a, b) => (b.intersectionRatio || 0) - (a.intersectionRatio || 0),
           );
 
         if (visible[0]?.target?.id) {
@@ -56,7 +52,7 @@ export default function Navbar() {
       {
         threshold: [0.2, 0.35, 0.5, 0.65],
         rootMargin: `-${NAVBAR_HEIGHT + 20}px 0px -50% 0px`,
-      }
+      },
     );
 
     sections.forEach((s) => io.observe(s));
@@ -66,13 +62,11 @@ export default function Navbar() {
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur border-b border-slate-200">
       {/* Container */}
-      <div className="page-container h-18 flex items-center justify-between">
+      <div className="page-container h-[72px] flex items-center justify-between">
         {/* BRAND */}
         <button
-          onClick={() =>
-            window.scrollTo({ top: 0, behavior: "smooth" })
-          }
-          className="text-lg font-semibold tracking-wide"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="text-xl sm:text-2xl font-semibold tracking-wide whitespace-nowrap"
         >
           <span className="text-slate-900">MARK</span>{" "}
           <span className="text-orange-600">&amp; SPARK</span>
@@ -92,9 +86,7 @@ export default function Navbar() {
               after:absolute after:left-0 after:-bottom-2 after:h-0.5
               after:bg-orange-600 after:transition-all
               ${
-                active === id
-                  ? "after:w-full"
-                  : "after:w-0 hover:after:w-full"
+                active === id ? "after:w-full" : "after:w-0 hover:after:w-full"
               }`}
             >
               {label}
@@ -104,8 +96,8 @@ export default function Navbar() {
 
         {/* MOBILE BUTTON */}
         <button
-          onClick={() => setOpen(!open)}
-          className="md:hidden uppercase text-xs tracking-widest"
+          onClick={() => setOpen((v) => !v)}
+          className="md:hidden uppercase text-xs tracking-widest text-slate-800 px-3 py-2 border border-slate-300 rounded-md"
         >
           {open ? "Close" : "Menu"}
         </button>
