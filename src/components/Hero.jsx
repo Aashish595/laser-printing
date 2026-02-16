@@ -37,10 +37,10 @@ export default function Hero() {
                   </h1>
 
                   {/* DESC: force clean 3-line feel */}
-                  <p className="mt-6 text-base md:text-lg text-slate-600 leading-relaxed max-w-[480px] [text-wrap:normal]">
+                  <p className="mt-6 text-base md:text-sm text-slate-600 font-semibold leading-relaxed max-w-[480px] [text-wrap:normal]">
                     Mark &amp; Spark specializes in high-quality branding across metal,
                     merchandise, textiles, and prototypes
-                    <br />
+                    
                     built to represent your brand with accuracy.
                   </p>
 

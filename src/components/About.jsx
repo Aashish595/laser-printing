@@ -42,7 +42,7 @@ export default function About() {
                     <span>We</span>
                     <span>Are</span>
                   </div>
-                  <div className="mt-[10px] h-[62px] w-[3px] bg-orange-600 " />
+                  <div className="mt-[10px] h-[65px] w-[3px] bg-orange-600 " />
                 </div>
 
                 {/* text */}
@@ -51,7 +51,7 @@ export default function About() {
                     About Mark &amp; Spark
                   </h2>
 
-                  <div className="mt-5 space-y-6 text-[15px] text-slate-700 leading-relaxed">
+                  <div className="mt-5 space-y-6 text-[14px] text-slate-700 leading-relaxed">
                     {/* 2 lines (on lg+) */}
                     <p>
                       Mark &amp; Spark is a precision-driven branding and
