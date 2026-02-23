@@ -3,7 +3,7 @@
 import { useMemo, useState, useEffect } from "react";
 import { Mail, Phone, MapPin, Instagram, Youtube } from "lucide-react";
 
-/* 🔁 same service images */
+/* same service images */
 const services = [
   { title: "Fiber Laser Engraving", img: "/tshirt.jpg" },
   { title: "Merchandise Printing", img: "/photo1.jpg" },
@@ -63,7 +63,7 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* SERVICES + INQUIRY (ONE LINE) */}
+              {/* SERVICES + INQUIRY */}
               <div className="mt-14 pl-[64px] sm:pl-[72px]">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
                   {/* Services */}
@@ -75,12 +75,21 @@ export default function Contact() {
                       </h3>
                     </div>
 
-                    <ul className="mt-6 space-y-3 text-[16px] text-slate-800/80">
-                      <li className="whitespace-nowrap">Fiber Laser Engraving</li>
-                      <li className="whitespace-nowrap">Merchandise Printing</li>
-                      <li className="whitespace-nowrap">3D Printing &amp; Prototyping</li>
+                    {/* Bullet dots */}
+                    <ul className="mt-6 space-y-3 text-[16px] text-slate-800/80 list-disc pl-5 marker:text-orange-600">
+                      <li className="whitespace-nowrap">
+                        Fiber Laser Engraving
+                      </li>
+                      <li className="whitespace-nowrap">
+                        Merchandise Printing
+                      </li>
+                      <li className="whitespace-nowrap">
+                        3D Printing &amp; Prototyping
+                      </li>
                       <li className="whitespace-nowrap">Screen Printing</li>
-                      <li className="whitespace-nowrap">CNC Machining Solutions</li>
+                      <li className="whitespace-nowrap">
+                        CNC Machining Solutions
+                      </li>
                       <li className="whitespace-nowrap">Fabric Printing</li>
                     </ul>
                   </div>
@@ -94,29 +103,53 @@ export default function Contact() {
                       </h3>
                     </div>
 
-                    {/* IMPORTANT: keep every row in one line */}
                     <div className="mt-6 space-y-3 text-[16px] text-slate-800/80">
-                      <Row
-                        icon={<Mail size={17} />}
-                        text="contactmarkandspark@gmail.com"
-                        oneLine
-                      />
-                      <Row
-                        icon={<Phone size={17} />}
-                        text="+91 84480 26287 / +91 84489 74976"
-                        oneLine
-                      />
-                      <Row
-                        icon={<Instagram size={17} />}
-                        text="@Mark_and_spark"
-                        oneLine
-                      />
-                      <Row icon={<Youtube size={17} />} text="@Youtube" oneLine />
-                      <Row
-                        icon={<MapPin size={17} />}
-                        text="E 77, DSIIDC Industrial Area, 110039"
-                        oneLine
-                      />
+                      <Row icon={<Mail size={17} />} oneLine>
+                        <a
+                          href="mailto:contactmarkandspark@gmail.com"
+                          className="hover:underline"
+                        >
+                          contactmarkandspark@gmail.com
+                        </a>
+                      </Row>
+
+                      <Row icon={<Phone size={17} />} oneLine>
+                        <a href="tel:+918448026287" className="hover:underline">
+                          +91 84480 26287
+                        </a>
+                        <span className="mx-2">/</span>
+                        <a href="tel:+918448974976" className="hover:underline">
+                          +91 84489 74976
+                        </a>
+                      </Row>
+
+                      {/* Instagram working */}
+                      <Row icon={<Instagram size={17} />} oneLine>
+                        <a
+                          href="https://www.instagram.com/mark_and_spark/?utm_source=ig_web_button_share_sheet"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="hover:underline"
+                        >
+                          @mark_and_spark
+                        </a>
+                      </Row>
+
+                      {/* YouTube working */}
+                      <Row icon={<Youtube size={17} />} oneLine>
+                        <a
+                          href="https://youtube.com/@markandspark?si=AkvjWrGBNbQTDHJ4"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="hover:underline"
+                        >
+                          @markandspark
+                        </a>
+                      </Row>
+
+                      <Row icon={<MapPin size={17} />} oneLine>
+                        E 77, DSIIDC Industrial Area, 110039
+                      </Row>
                     </div>
                   </div>
                 </div>
@@ -125,7 +158,7 @@ export default function Contact() {
 
             {/* RIGHT — AUTO CAROUSEL */}
             <div className="flex flex-col items-center lg:items-end">
-              <div className="w-full max-w-[820px]">
+              <div className="w-full max-w-205">
                 <h3 className="text-3xl font-semibold tracking-tight text-slate-900 text-center">
                   MARK &amp; SPARK
                 </h3>
@@ -141,7 +174,6 @@ export default function Contact() {
                   onMouseEnter={() => setPaused(true)}
                   onMouseLeave={() => setPaused(false)}
                 >
-                  {/* Bigger stage so main image can be bigger */}
                   <div className="relative h-[320px] sm:h-[360px]">
                     {/* left */}
                     <Card
@@ -172,16 +204,12 @@ export default function Contact() {
 
 /* helpers */
 
-function Row({ icon, text, oneLine = false }) {
+function Row({ icon, children, oneLine = false }) {
   return (
     <div className="flex items-center gap-3">
-      <span className="text-slate-700 shrink-0">{icon}</span>
-      <span
-        className={`leading-[1.6] ${
-          oneLine ? "whitespace-nowrap" : ""
-        }`}
-      >
-        {text}
+      <span className="text-orange-500 shrink-0">{icon}</span>
+      <span className={`leading-[1.6] ${oneLine ? "whitespace-nowrap" : ""}`}>
+        {children}
       </span>
     </div>
   );

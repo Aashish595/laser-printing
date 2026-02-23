@@ -67,7 +67,7 @@ export default function Hero() {
 
           {/* RIGHT */}
           <Reveal delay={0.2}>
-            <div className="relative w-full rounded-3xl overflow-hidden border border-slate-200 shadow-sm h-[56vh] lg:h-[72vh] xl:h-[78vh]">
+            <div className="relative w-full rounded-3xl overflow-hidden border border-slate-200 shadow-sm h-[56vh] lg:h-[65vh] xl:h-[70vh]">
               <video
                 ref={videoRef}
                 className="w-full h-full object-cover"
