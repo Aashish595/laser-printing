@@ -3,20 +3,21 @@
 import { useMemo, useState, useEffect } from "react";
 import { Mail, Phone, MapPin, Instagram, Youtube } from "lucide-react";
 
-/* same service images */
+/* services media (images + optional videos) */
 const services = [
-  { title: "Fiber Laser Engraving", img: "/tshirt.jpg" },
-  { title: "Merchandise Printing", img: "/photo1.jpg" },
-  { title: "3D Printing & Prototyping", img: "/branded-Merchandise.jpg" },
-  { title: "Screen Printing", img: "/about.jpg" },
-  { title: "CNC Machining Solutions", img: "/tshirt.jpg" },
-  { title: "Fabric Printing", img: "/photo1.jpg" },
+  { title: "Fiber Laser Engraving", src: "/fiberLaser.mp4" },
+  { title: "Merchandise Printing", src: "/photo1.jpg" },
+  { title: "3D Printing & Prototyping", src: "/3dPrint.mp4" },    
+  { title: "Screen Printing", src: "/about.jpg" },
+  { title: "CNC Machining Solutions", src: "/mainVideo.mp4" },    
+  { title: "Fabric Printing", src: "/fabric.jpg" },
 ];
 
+
 export default function Contact() {
-  const images = useMemo(
-    () => services.map((s) => ({ src: s.img, alt: s.title })),
-    [],
+  const media = useMemo(
+    () => services.map((s) => ({ src: s.src, alt: s.title })),
+    []
   );
 
   const [active, setActive] = useState(0);
@@ -26,13 +27,13 @@ export default function Contact() {
   useEffect(() => {
     if (paused) return;
     const t = setInterval(() => {
-      setActive((i) => (i + 1) % images.length);
+      setActive((i) => (i + 1) % media.length);
     }, 2500);
     return () => clearInterval(t);
-  }, [paused, images.length]);
+  }, [paused, media.length]);
 
-  const leftIdx = (active - 1 + images.length) % images.length;
-  const rightIdx = (active + 1) % images.length;
+  const leftIdx = (active - 1 + media.length) % media.length;
+  const rightIdx = (active + 1) % media.length;
 
   return (
     <section id="contact" className="bg-slate-300 scroll-mt-[90px]">
@@ -49,7 +50,7 @@ export default function Contact() {
                   <span>Touch</span>
                 </div>
 
-                <div className="mt-[8px] h-[62px] w-[3px] bg-orange-600 shrink-0" />
+                <div className="mt-[8px] h-[62px] w-[5px] bg-orange-600 shrink-0" />
 
                 <div className="pl-2">
                   <h2 className="text-5xl font-semibold tracking-tight leading-[1] text-slate-900">
@@ -69,35 +70,26 @@ export default function Contact() {
                   {/* Services */}
                   <div>
                     <div className="flex items-center gap-4">
-                      <div className="h-9 w-[3px] bg-orange-600" />
+                      <div className="h-9 w-[4px] bg-orange-600" />
                       <h3 className="text-3xl font-semibold text-slate-900">
                         Services
                       </h3>
                     </div>
 
-                    {/* Bullet dots */}
+                    {/* ✅ Orange bullets */}
                     <ul className="mt-6 space-y-3 text-[16px] text-slate-800/80 list-disc pl-5 marker:text-orange-600">
-                      <li className="whitespace-nowrap">
-                        Fiber Laser Engraving
-                      </li>
-                      <li className="whitespace-nowrap">
-                        Merchandise Printing
-                      </li>
-                      <li className="whitespace-nowrap">
-                        3D Printing &amp; Prototyping
-                      </li>
-                      <li className="whitespace-nowrap">Screen Printing</li>
-                      <li className="whitespace-nowrap">
-                        CNC Machining Solutions
-                      </li>
-                      <li className="whitespace-nowrap">Fabric Printing</li>
+                      {services.map((s) => (
+                        <li key={s.title} className="whitespace-nowrap">
+                          {s.title}
+                        </li>
+                      ))}
                     </ul>
                   </div>
 
                   {/* Inquiry */}
                   <div>
                     <div className="flex items-center gap-4">
-                      <div className="h-9 w-[3px] bg-orange-600" />
+                      <div className="h-9 w-[4px] bg-orange-600" />
                       <h3 className="text-3xl font-semibold text-slate-900">
                         Inquiry
                       </h3>
@@ -123,7 +115,6 @@ export default function Contact() {
                         </a>
                       </Row>
 
-                      {/* Instagram working */}
                       <Row icon={<Instagram size={17} />} oneLine>
                         <a
                           href="https://www.instagram.com/mark_and_spark/?utm_source=ig_web_button_share_sheet"
@@ -135,7 +126,6 @@ export default function Contact() {
                         </a>
                       </Row>
 
-                      {/* YouTube working */}
                       <Row icon={<Youtube size={17} />} oneLine>
                         <a
                           href="https://youtube.com/@markandspark?si=AkvjWrGBNbQTDHJ4"
@@ -177,16 +167,18 @@ export default function Contact() {
                   <div className="relative h-[320px] sm:h-[360px]">
                     {/* left */}
                     <Card
-                      img={images[leftIdx]}
+                      item={media[leftIdx]}
+                      active={false}
                       className="-translate-x-[125%] opacity-25 scale-[0.94]"
                     />
                     {/* right */}
                     <Card
-                      img={images[rightIdx]}
+                      item={media[rightIdx]}
+                      active={false}
                       className="translate-x-[25%] opacity-25 scale-[0.94]"
                     />
-                    {/* center (MAIN BIG) */}
-                    <Card img={images[active]} main />
+                    {/* center */}
+                    <Card item={media[active]} active main />
                   </div>
                 </div>
 
@@ -215,7 +207,13 @@ function Row({ icon, children, oneLine = false }) {
   );
 }
 
-function Card({ img, main, className = "" }) {
+/**
+ * Card supports both images and MP4 videos.
+ * - Only the MAIN card auto-plays (active=true) for better performance.
+ */
+function Card({ item, main, active, className = "" }) {
+  const isVideo = item.src?.toLowerCase().endsWith(".mp4");
+
   return (
     <div
       className={`
@@ -229,12 +227,27 @@ function Card({ img, main, className = "" }) {
         ${className}
       `}
     >
-      <img
-        src={img.src}
-        alt={img.alt}
-        className="w-full h-full object-cover"
-        draggable={false}
-      />
+      {isVideo ? (
+        <video
+          className="w-full h-full object-cover"
+          autoPlay={!!active}
+          muted
+          loop
+          playsInline
+          preload="metadata"
+        >
+          <source src={item.src} type="video/mp4" />
+        </video>
+      ) : (
+        <img
+          src={item.src}
+          alt={item.alt}
+          className="w-full h-full object-cover"
+          draggable={false}
+          loading="lazy"
+        />
+      )}
+
       {!main && <div className="absolute inset-0 bg-slate-900/10" />}
     </div>
   );

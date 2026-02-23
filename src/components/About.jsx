@@ -42,7 +42,7 @@ export default function About() {
                     <span>We</span>
                     <span>Are</span>
                   </div>
-                  <div className="mt-[10px] h-[65px] w-[3px] bg-orange-600 " />
+                  <div className="mt-[10px] h-[65px] w-[5px] bg-orange-600 " />
                 </div>
 
                 {/* text */}
