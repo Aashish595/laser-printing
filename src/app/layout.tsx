@@ -10,9 +10,11 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "LaserPrint Co. | Precision Industrial Printing",
-  description:
-    "High-precision laser printing, engraving, and industrial fabrication solutions.",
+  title: "Mark & Spark",
+  description: "High-precision laser printing, engraving, and industrial fabrication solutions.",
+  icons: {
+    icon: "/logo.jpg",       
+  },
 };
 
 export default function RootLayout({

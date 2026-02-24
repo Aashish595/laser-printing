@@ -36,18 +36,20 @@ export default function About() {
             <div className="w-full lg:w-[620px] lg:justify-self-end">
               <div className="flex items-start gap-4">
                 {/* label + bar */}
-                <div className="flex items-start gap-3 shrink-0">
-                  <div className="flex flex-col text-[11px] leading-[14px] text-slate-700/70 mt-[10px] text-right">
+                <div className="flex items-start gap-3 shrink-0 pt-[2px]">
+                  <div className="flex flex-col text-[11px] leading-[14px] text-slate-700/70 text-right">
                     <span>Who</span>
                     <span>We</span>
                     <span>Are</span>
                   </div>
-                  <div className="mt-[10px] h-[65px] w-[5px] bg-orange-600 " />
+
+                  {/* match heading height better */}
+                  <div className="w-[5px] bg-orange-600 h-[44px] md:h-[56px]" />
                 </div>
 
                 {/* text */}
                 <div className="min-w-0">
-                  <h2 className="text-4xl md:text-5xl font-semibold tracking-tight leading-[1.05] text-slate-900">
+                  <h2 className="text-4xl md:text-5xl font-semibold tracking-tight leading-none text-slate-900">
                     About Mark &amp; Spark
                   </h2>
 
